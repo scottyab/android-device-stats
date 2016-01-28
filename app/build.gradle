@@ -8,11 +8,39 @@ android {
         applicationId "com.devicestats.android"
         minSdkVersion 7
         targetSdkVersion 22
-        versionCode 1
-        versionName "1.0"
+        versionCode 6
+        versionName "1.1"
     }
+
+//check if the keystore details are defined in gradle.properties (this is so the key is not in github)
+    if(project.hasProperty("DEVICE_STATS_FILE")) {
+        signingConfigs {
+            //from gradle.properties
+            release {
+                storeFile file(DEVICE_STATS_FILE)
+                keyAlias DEVICE_STATS_KEY
+                storePassword DEVICE_STATS_STORE_PASS
+                keyPassword DEVICE_STATS_KEY_PASS
+            }
+        }
+    }
+
     buildTypes {
+        applicationVariants.all { variant ->
+            variant.outputs.each { output ->
+                def newApkName = "DeviceStats-" + output.outputFile.name.replace(".apk", "-" + defaultConfig.versionName + "[" + defaultConfig.versionCode + "].apk")
+                output.outputFile = new File(output.outputFile.parent, newApkName)
+            }
+        }
+
+        debug{
+            debuggable true
+            versionNameSuffix 'debug'
+        }
         release {
+            if(project.hasProperty("DEVICE_STATS_FILE")) {
+                signingConfig = signingConfigs.release
+            }
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">DeviceStatsReWork</string>
+    <string name="app_name">DeviceStats</string>
 
     <string name="label_screen_size">Screen Size: </string>
     <string name="menu_share">Share Stats</string>
