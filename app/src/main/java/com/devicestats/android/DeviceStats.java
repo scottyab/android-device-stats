@@ -115,8 +115,7 @@ public class DeviceStats implements Parcelable {
         this.date = date;
     }
 
-    public void setDeviceId(String deviceId, String serial, String secureId) {
-        this.imei = deviceId;
+    public void setDeviceId(String serial, String secureId) {
         this.serialNumber = serial;
         this.secureId = secureId;
     }
@@ -150,7 +149,6 @@ public class DeviceStats implements Parcelable {
         deviceInfoLabelMap.put(StatsLabels.RELEASE_LABEL, release);
         deviceInfoLabelMap.put(StatsLabels.BRAND_LABEL, brand);
 
-        deviceInfoLabelMap.put(StatsLabels.IEMI_LABEL, imei);
         deviceInfoLabelMap.put(StatsLabels.SERIAL_LABEL, serialNumber);
         deviceInfoLabelMap.put(StatsLabels.SECURE_ID_LABEL, secureId);
 
@@ -294,7 +292,6 @@ public class DeviceStats implements Parcelable {
         dest.writeString(this.apiLevel);
         dest.writeString(this.release);
         dest.writeString(this.brand);
-        dest.writeString(this.imei);
         dest.writeString(this.serialNumber);
         dest.writeString(this.secureId);
         dest.writeByte(hasNFC ? (byte) 1 : (byte) 0);
@@ -345,7 +342,6 @@ public class DeviceStats implements Parcelable {
         this.apiLevel = in.readString();
         this.release = in.readString();
         this.brand = in.readString();
-        this.imei = in.readString();
         this.serialNumber = in.readString();
         this.secureId = in.readString();
         this.hasNFC = in.readByte() != 0;

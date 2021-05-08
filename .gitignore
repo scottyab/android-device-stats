@@ -1,9 +1,58 @@
+# java dumps during errors
+*.hprof
+
+/.idea/*
+/.idea/**
 *.iml
-.gradle
-/local.properties
-/.idea/workspace.xml
-/.idea/libraries
 .DS_Store
-/build
-/captures
-.DS_Store
+
+# Built application files
+*.apk
+*.ap_
+
+# Files for the Dalvik VM
+*.dex
+
+# Java class files
+*.class
+
+# Generated files
+bin/
+gen/
+
+# Gradle files
+.gradle/
+build/
+*/build/**
+
+# Local configuration file (sdk path, etc)
+local.properties
+
+
+# Log Files
+*.log
+
+# memory dumps
+captures/
+
+.idea/instapk.xml
+instapk.log*
+.externalNativeBuild
+*/workspace.xml
+/firebase-distribution-release-notes.txt
+/firebase-adminsdk-service-account.json
+/google-api-service-account-details.json
+
+#Static analysis configuration files
+/static-analysis/detekt/detekt-config.yml
+/static-analysis/ktlint/.editorconfig
+
+# Keep
+# Uncomment if we need to update the codestyle
+# !.idea/codeStyles
+!.idea/inspectionProfiles
+!.idea/vcs.xml
+
+# Don't push these files in remote. They're to be encrypted.
+team-props/secure/*
+!team-props/secure/*.gpg
