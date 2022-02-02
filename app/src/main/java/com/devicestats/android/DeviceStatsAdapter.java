@@ -2,14 +2,14 @@ package com.devicestats.android;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentStatePagerAdapter;
-import android.support.v4.content.ContextCompat;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ImageSpan;
+import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentStatePagerAdapter;
 
 /**
  * Created by 1andbarb on 12/01/2016.
@@ -20,7 +20,7 @@ public class DeviceStatsAdapter extends FragmentStatePagerAdapter {
     private final DeviceStats mDeviceStats;
     private final Context mContext;
 
-    private int[] imageResId = {
+    private final int[] imageResId = {
             R.drawable.ic_developer_mode_white_24dp,
             R.drawable.ic_perm_device_information_white_24dp,
             R.drawable.ic_speaker_phone_white_24dp,

@@ -1,14 +1,21 @@
+apply from: './dependencies.gradle'
+
+
 buildscript {
+    apply from: './dependencies.gradle'
+
     repositories {
         google()
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:4.1.1'
+        classpath "com.android.tools.build:gradle:$agpVersion"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
     }
 }
 
 allprojects {
+    ext.isCI = System.getenv('CI') ?: false
     repositories {
         google()
         mavenCentral()

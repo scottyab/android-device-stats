@@ -2,9 +2,6 @@ package com.devicestats.android;
 
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.CardView;
-import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,18 +11,14 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
-import com.devicestats.android.R;
+import androidx.cardview.widget.CardView;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-
-/*import it.gmariotti.cardslib.library.internal.Card;
-import it.gmariotti.cardslib.library.internal.CardHeader;
-import it.gmariotti.cardslib.library.prototypes.CardWithList;
-import it.gmariotti.cardslib.library.view.CardView;*/
 
 
 /**
@@ -41,8 +34,7 @@ public class StatsFragment extends Fragment {
 
     private LinearLayout mCardParentLayout;
 
-    public enum DeviceInfoType
-    {
+    public enum DeviceInfoType {
         DEVICE_INFO,
         HARDWARE,
         CIPHERS,
@@ -93,7 +85,7 @@ public class StatsFragment extends Fragment {
                              Bundle savedInstanceState) {
         Log.i(TAG, "onCreateView");
         // Inflate the layout for this fragment
-        View view =  inflater.inflate(R.layout.fragment_stats, container, false);
+        View view = inflater.inflate(R.layout.fragment_stats, container, false);
         mCardParentLayout = (LinearLayout) view.findViewById(R.id.fragment_stats_card_parent_layout);
         return view;
     }
@@ -115,8 +107,7 @@ public class StatsFragment extends Fragment {
         valueImageMap.put(DeviceStats.NO_HARDWARE, R.drawable.ic_cancel_red_24dp);
 
         //add specified data from device stats
-        switch (mDeviceInfoType)
-        {
+        switch (mDeviceInfoType) {
             case DEVICE_INFO:
                 addRowsToCard(mDeviceStats.getDeviceInfoLabelMap(), null);
                 break;
@@ -125,9 +116,9 @@ public class StatsFragment extends Fragment {
                 break;
             case CIPHERS:
                 boolean isCollapseContent = true;
-                addRowsToCardSingle("Default Protocols", null, new String[] {TextUtils.join(", ",mDeviceStats.getProtocolsDefault())}, isCollapseContent);
+                addRowsToCardSingle("Default Protocols", null, new String[]{TextUtils.join(", ", mDeviceStats.getProtocolsDefault())}, isCollapseContent);
                 addRowsToCardSingle("Default Cipher Suites", null, mDeviceStats.getCipherSuitesDefault(), isCollapseContent);
-                addRowsToCardSingle("Supported Protocols", null, new String[] {TextUtils.join(", ",mDeviceStats.getProtocolsSupport())}, isCollapseContent);
+                addRowsToCardSingle("Supported Protocols", null, new String[]{TextUtils.join(", ", mDeviceStats.getProtocolsSupport())}, isCollapseContent);
                 addRowsToCardSingle("Supported Cipher Suites", null, mDeviceStats.getCipherSuitesSupport(), isCollapseContent);
                 break;
             case ALGORITHMS:
@@ -146,14 +137,13 @@ public class StatsFragment extends Fragment {
         LayoutInflater inflater = LayoutInflater.from(getActivity());
         FrameLayout cardView = (FrameLayout) inflater.inflate(R.layout.element_card_view, null, false);
         LinearLayout cardBodyLayout = (LinearLayout) cardView.findViewById(R.id.fragment_stats_card_body_layout);
-        for (Map.Entry<String, String> entry : labelMap.entrySet())
-        {
+        for (Map.Entry<String, String> entry : labelMap.entrySet()) {
             View rowView = inflater.inflate(R.layout.element_card_double_column_row, null, false);
             TextView textViewLabel = (TextView) rowView.findViewById(R.id.element_card_row_label);
             ImageView imageViewValue = (ImageView) rowView.findViewById(R.id.element_card_row_value_image);
             TextView textViewValue = (TextView) rowView.findViewById(R.id.element_card_row_value);
             textViewLabel.setText(entry.getKey());
-            if (valueImageMap!=null) {
+            if (valueImageMap != null) {
                 imageViewValue.setImageDrawable(getResources()
                         .getDrawable(valueImageMap.get(entry.getValue())));
                 setImageColumnVisibility(imageViewValue, textViewValue, true);
@@ -175,8 +165,7 @@ public class StatsFragment extends Fragment {
 
     private void addRowsToCardSingle(String title, String subTitle, Map<String,
             List<String>> valuesMap, boolean isCollapseContent) {
-        for (Map.Entry<String, List<String>> entry : valuesMap.entrySet())
-        {
+        for (Map.Entry<String, List<String>> entry : valuesMap.entrySet()) {
             addRowsToCardSingle(title, subTitle.concat(entry.getKey()), entry.getValue(), isCollapseContent);
         }
     }
@@ -190,24 +179,21 @@ public class StatsFragment extends Fragment {
         FrameLayout cardView = (FrameLayout) inflater.inflate(R.layout.element_card_view, null, false);
         final LinearLayout cardBodyLayout = (LinearLayout) cardView.findViewById(R.id.fragment_stats_card_body_layout);
         //add title if required
-        if (title!=null)
-        {
+        if (title != null) {
             LinearLayout headerParentLayout = (LinearLayout) cardView.findViewById(R.id.fragment_stats_header_parent_layout);
             TextView textViewTitle = (TextView) cardView.findViewById(R.id.fragment_stats_header_text);
             textViewTitle.setText(title);
-            if (subTitle!=null)
-            {
+            if (subTitle != null) {
                 TextView textViewSubTitle = (TextView) cardView.findViewById(R.id.fragment_stats_header_subtitle_text);
                 textViewSubTitle.setText(subTitle);
                 textViewSubTitle.setVisibility(View.VISIBLE);
             }
-            if (isCollapseContent)
-            {
+            if (isCollapseContent) {
                 cardBodyLayout.setVisibility(View.GONE);
                 headerParentLayout.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if (cardBodyLayout.getVisibility()==View.GONE) {
+                        if (cardBodyLayout.getVisibility() == View.GONE) {
                             cardBodyLayout.setVisibility(View.VISIBLE);
                         } else {
                             cardBodyLayout.setVisibility(View.GONE);
@@ -217,8 +203,7 @@ public class StatsFragment extends Fragment {
             }
             headerParentLayout.setVisibility(View.VISIBLE);
         }
-        for (String value : valuesList)
-        {
+        for (String value : valuesList) {
             View rowView = inflater.inflate(R.layout.element_card_single_column_row, null, false);
             TextView textViewValue = (TextView) rowView.findViewById(R.id.element_card_row_value);
             textViewValue.setText(value);

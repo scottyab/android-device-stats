@@ -1,0 +1,20 @@
+ext {
+    agpVersion = '7.1.0'
+    javaCompatibilityVersion = JavaVersion.VERSION_11
+    kotlinVersion = '1.6.10'
+    codeDesugaringLibraryVersion = '1.1.5'
+
+    coordinatorlayoutVersion = '1.1.0'
+    materialLibraryVersion = '1.4.0'
+    cardviewVersion = "1.0.0"
+
+    //testings deps
+    junitVersion = '4.13.2'
+    annotationVersion = "1.2.0"
+    androidXTestVersion = '1.4.0'
+    archCoreTestingVersion = "2.1.0"
+    androidXTestJunitVersion = "1.1.3"
+    // Keep as 3.3.0 until issue with 3.4.0 and 3.5.0-alpha03 fixed https://stackoverflow.com/questions/66915068/test-error-noclassdeffounderror-failed-resolution-of-lorg-hamcrest-matchers
+    espressoVersion = '3.3.0'
+
+}
